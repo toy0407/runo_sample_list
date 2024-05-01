@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:get/state_manager.dart';
-import 'package:runo_sample_list/backend_simulator.dart';
-import 'package:runo_sample_list/item.model.dart';
+import 'package:runo_sample_list/data/backend_simulator.dart';
+import 'package:runo_sample_list/models/item.model.dart';
 
 class HomePageController extends GetxController {
   RxList<ItemModel> itemList = <ItemModel>[].obs;

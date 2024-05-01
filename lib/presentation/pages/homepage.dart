@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
-import 'package:runo_sample_list/homepage_controller.dart';
-import 'package:runo_sample_list/item.model.dart';
+import 'package:runo_sample_list/controllers/homepage_controller.dart';
+import 'package:runo_sample_list/models/item.model.dart';
+import 'package:runo_sample_list/presentation/widgets/list_item_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,7 +40,7 @@ class _HomePageState extends State<HomePage> {
           child: Obx(
             () => ListView.builder(
               itemBuilder: (context, index) {
-                return _listItem(index);
+                return listItem(index);
               },
               itemCount: _homePageController.itemList.length,
             ),
@@ -82,18 +83,5 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ));
-  }
-
-  Widget _listItem(int index) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 4, bottom: 4),
-      child: ListTile(
-        title: Text(_homePageController.itemList.elementAt(index).name!),
-        subtitle:
-            Text("id: ${_homePageController.itemList.elementAt(index).id}"),
-        tileColor: Colors.green[300],
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      ),
-    );
   }
 }

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:runo_sample_list/item.model.dart';
+import 'package:runo_sample_list/models/item.model.dart';
 
 class BackendSimulator {
   Future<ItemModel?> simulateBackend(ItemModel item) async {
