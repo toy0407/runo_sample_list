@@ -7,11 +7,15 @@ class BackendSimulator {
     // Simulating backend response
     await Future.delayed(Duration(seconds: 10)); // Simulating delay
     // Simulating successful response
-    item.id = Random().nextInt(100) + 1000;
-    item.name = "${item.name} BACKEND";
-    return item;
+    if (Random().nextBool()) {
+      item.id = Random().nextInt(100) + 1000;
+      item.name = "${item.name} BACKEND";
+      return item;
+    }
 
     // Simulating failed response
-    return null;
+    else {
+      return null;
+    }
   }
 }

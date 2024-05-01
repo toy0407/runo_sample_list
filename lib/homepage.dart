@@ -13,7 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  HomePageController _homePageController = Get.put(HomePageController());
+  final HomePageController _homePageController = Get.put(HomePageController());
   late TextEditingController _nameTextEditingController;
 
   @override
@@ -32,35 +32,40 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Animated List"),
+          title: const Text("Animated List"),
         ),
-        body: Obx(
-          () => ListView.builder(
-            itemBuilder: (context, index) {
-              return _listItem(index);
-            },
-            itemCount: _homePageController.itemList.length,
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Obx(
+            () => ListView.builder(
+              itemBuilder: (context, index) {
+                return _listItem(index);
+              },
+              itemCount: _homePageController.itemList.length,
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
           onPressed: () {
             showModalBottomSheet(
               context: context,
-              constraints: BoxConstraints(minHeight: 800),
+              constraints: const BoxConstraints(minHeight: 800),
               builder: (context) {
                 return Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
-                    constraints: BoxConstraints(
+                    constraints: const BoxConstraints(
                         maxHeight: double.infinity, minWidth: double.infinity),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Enter Item", style: TextStyle(fontSize: 32)),
-                        SizedBox(height: 100),
+                        const Text("Enter name",
+                            style: TextStyle(fontSize: 24)),
+                        const SizedBox(height: 32),
                         CupertinoTextField(
                             controller: _nameTextEditingController),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 12),
                         OutlinedButton(
                             onPressed: () {
                               _homePageController.addElement(ItemModel(
@@ -68,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                               Navigator.pop(context);
                               _nameTextEditingController.clear();
                             },
-                            child: Text("SUBMIT"))
+                            child: const Text("SUBMIT"))
                       ],
                     ),
                   ),
@@ -80,11 +85,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _listItem(int index) {
-    print(index);
-    print(_homePageController.itemList.elementAt(index).name);
-    return ListTile(
-      title: Text(_homePageController.itemList.elementAt(index).name!),
-      subtitle: Text("id: ${_homePageController.itemList.elementAt(index).id}"),
+    return Padding(
+      padding: const EdgeInsets.only(top: 4, bottom: 4),
+      child: ListTile(
+        title: Text(_homePageController.itemList.elementAt(index).name!),
+        subtitle:
+            Text("id: ${_homePageController.itemList.elementAt(index).id}"),
+        tileColor: Colors.green[300],
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      ),
     );
   }
 }
